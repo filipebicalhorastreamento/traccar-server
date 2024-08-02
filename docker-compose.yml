@@ -67,3 +67,4 @@ services:
         - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
 volumes:
     db-datavolume:
+    mysqlbkp:
