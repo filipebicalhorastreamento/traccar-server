@@ -16,7 +16,7 @@ services:
         labels:
             - traefik.enable=false
     traccar:
-        image: ${TRACCAR_IMAGE}
+        image: traccar/traccar:6.2-ubuntu
         container_name: traccar
         depends_on:
             - db
@@ -28,11 +28,11 @@ services:
             - "5000-5150:5000-5150"
             - "8082:8082"
         labels:
-            - traefik.http.routers.traccar.rule=Host(`web.${DOMAIN}`)
+            - traefik.http.routers.traccar.rule=Host(`sistema.swiftychat.com.br`)
             - traefik.http.services.traccar_web.loadbalancer.server.port=8082
     rev_proxy:
         image: traefik:v2.2
-        container_name: rev_proxy
+        container_name: rev-proxy
         restart: always
         env_file: .env
         ports:
@@ -51,7 +51,7 @@ services:
 
     traefik-forward-auth:
         image: thomseddon/traefik-forward-auth:2
-        container_name: traefik_forward_auth
+        container_name: traefik-forward-auth
         restart: always
         environment:
         - DEFAULT_PROVIDER=${DEFAULT_PROVIDER}
